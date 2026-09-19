@@ -1,20 +1,14 @@
-import { Navigate, useLocation } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../../custom/AuthContext";
 
-interface ProtectedRouteProps {
-  children: React.ReactNode;
-}
-
-export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
+export const ProtectedRoute = () => {
   const { state } = useAuth();
-  const location = useLocation();
 
-  if (!state.user) {
-    // Redirect to /sign-in, preserving current location in state
-    return <Navigate to="/sign-in" state={{ from: location }} replace />;
+  if (!state) {
+    return <Navigate to="/sign-in" replace />;
   }
 
-  return <>{children}</>;
+  return <Outlet />;
 };
 
 export default ProtectedRoute;

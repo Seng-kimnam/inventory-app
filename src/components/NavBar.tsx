@@ -1,13 +1,19 @@
 import { useNavigate, NavLink } from "react-router-dom";
 import { useAuth } from "../custom/AuthContext";
+import { useCart } from "../custom/CartContext";
 import { LogOut, Package2, Users, LayoutDashboard } from "lucide-react";
 import { Button } from "./ui/button";
 
 const NavBar = () => {
   const { state, signOut } = useAuth();
+  const { state: cartState } = useCart();
   const navigate = useNavigate();
   const userEmail = state.user?.email || "Guest";
   const userInitial = userEmail.charAt(0).toUpperCase();
+  const cartItemCount = cartState.items.reduce(
+    (acc, item) => acc + item.quantity,
+    0,
+  );
 
   const handleSignOut = () => {
     signOut();
@@ -48,11 +54,24 @@ const NavBar = () => {
               <Users className="size-4" />
               <span>User Directory</span>
             </NavLink>
-
-            <span className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-medium text-slate-500 cursor-not-allowed">
+            <NavLink
+              to="/inventory"
+              className={({ isActive }) =>
+                `flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+                  isActive
+                    ? "bg-slate-800/90 text-indigo-400 shadow-sm"
+                    : "text-slate-400 hover:text-slate-200 hover:bg-slate-900/60"
+                }`
+              }
+            >
               <LayoutDashboard className="size-4" />
-              <span>Inventory (Coming Soon)</span>
-            </span>
+              <span>Inventory</span>
+              {cartItemCount > 0 && (
+                <span className="ml-1 px-1.5 py-0.2 rounded-full text-[10px] font-bold bg-indigo-600 text-white leading-none">
+                  {cartItemCount}
+                </span>
+              )}
+            </NavLink>
           </nav>
         </div>
 

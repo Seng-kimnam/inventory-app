@@ -49,11 +49,9 @@ const UserDirectory = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedDept, setSelectedDept] = useState<string>("All");
 
-  const {
-    data,
-    loading,
-    error,
-  } = useFetch<UsersResponse>("https://dummyjson.com/users?limit=30");
+  const { data, loading, error } = useFetch<UsersResponse>(
+    "https://dummyjson.com/users?limit=30",
+  );
 
   const users = data?.users || [];
 
@@ -119,8 +117,12 @@ const UserDirectory = () => {
                 <Users className="size-4" />
               </div>
               <div>
-                <p className="text-[10px] uppercase font-semibold text-slate-400">Total Users</p>
-                <p className="text-base font-bold text-slate-100">{loading ? "..." : users.length}</p>
+                <p className="text-[10px] uppercase font-semibold text-slate-400">
+                  Total Users
+                </p>
+                <p className="text-base font-bold text-slate-100">
+                  {loading ? "..." : users.length}
+                </p>
               </div>
             </div>
 
@@ -129,7 +131,9 @@ const UserDirectory = () => {
                 <Sparkles className="size-4" />
               </div>
               <div>
-                <p className="text-[10px] uppercase font-semibold text-slate-400">Live Status</p>
+                <p className="text-[10px] uppercase font-semibold text-slate-400">
+                  Live Status
+                </p>
                 <p className="text-base font-bold text-emerald-400">Active</p>
               </div>
             </div>
@@ -164,7 +168,9 @@ const UserDirectory = () => {
           {/* Department Filter Pills */}
           {departments.length > 1 && (
             <div className="flex items-center gap-2 overflow-x-auto pb-1 text-xs">
-              <span className="text-slate-400 font-medium whitespace-nowrap mr-1">Department:</span>
+              <span className="text-slate-400 font-medium whitespace-nowrap mr-1">
+                Department:
+              </span>
               {departments.map((dept) => (
                 <button
                   key={dept}
@@ -212,7 +218,9 @@ const UserDirectory = () => {
             <div className="inline-flex size-12 rounded-full bg-rose-900/40 text-rose-400 items-center justify-center mb-3">
               <AlertTriangle className="size-6" />
             </div>
-            <h3 className="text-base font-semibold text-rose-200">Failed to Load Users</h3>
+            <h3 className="text-base font-semibold text-rose-200">
+              Failed to Load Users
+            </h3>
             <p className="text-xs text-rose-300/80 mt-1">{error}</p>
             <Button
               onClick={() => window.location.reload()}
@@ -227,9 +235,12 @@ const UserDirectory = () => {
           /* Empty Search Results State */
           <div className="p-12 text-center border border-dashed border-slate-800 rounded-2xl my-8 bg-slate-900/30">
             <Users className="size-10 text-slate-500 mx-auto mb-3" />
-            <h3 className="text-base font-semibold text-slate-200">No matching users found</h3>
+            <h3 className="text-base font-semibold text-slate-200">
+              No matching users found
+            </h3>
             <p className="text-xs text-slate-400 mt-1 max-w-sm mx-auto">
-              We couldn't find any users matching "{searchTerm}". Try refining your query or clear the filter.
+              We couldn't find any users matching "{searchTerm}". Try refining
+              your query or clear the filter.
             </p>
             <Button
               variant="outline"
@@ -332,7 +343,7 @@ const UserDirectory = () => {
         )}
       </main>
     </div>
- //     </p>
+    //     </p>
     //   ))}
     // </div>
   );
