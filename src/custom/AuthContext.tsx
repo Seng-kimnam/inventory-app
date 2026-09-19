@@ -17,7 +17,7 @@ type AuthAction =
 function authReducer(state: AuthState, action: AuthAction): AuthState {
   switch (action.type) {
     case "SIGN_IN":
-      if (action.payload?.email === mockUser.user?.email) {
+      if (action.payload?.email.toLowerCase() === mockUser.user?.email.toLowerCase()) {
         return { ...state, user: { email: action.payload?.email || "" } };
       } else {
         return state;
@@ -40,7 +40,7 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | null>(null);
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [state, dispatch] = useReducer(authReducer, { user: null });
+  const [state, dispatch] = useReducer(authReducer, mockUser);
 
   const signIn = (email: string): boolean => {
     const normalized = email.trim().toLowerCase();

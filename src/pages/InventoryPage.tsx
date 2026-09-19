@@ -1,6 +1,7 @@
 import NavBar from "../components/NavBar";
 import Products from "../components/Product";
 import Cart from "../components/Cart";
+import CheckoutSummary from "../components/CheckoutSummary";
 import { useCart } from "../custom/CartContext";
 import {
   Boxes,
@@ -84,9 +85,10 @@ const InventoryPage = () => {
             <Products />
           </section>
 
-          {/* Cart Sidebar */}
-          <aside className="lg:col-span-5 xl:col-span-4">
+          {/* Cart & Checkout Column */}
+          <aside className="lg:col-span-5 xl:col-span-4 space-y-6">
             <Cart />
+            <CheckoutSummary />
           </aside>
         </div>
       </main>

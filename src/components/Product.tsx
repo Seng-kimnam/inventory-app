@@ -156,7 +156,7 @@ export default function Products() {
     const item = state.items.find((i) => i.id === productId);
     return item ? item.quantity : 0;
   };
-
+  
   return (
     <div className="space-y-6">
       {/* Controls: Search and Categories */}
