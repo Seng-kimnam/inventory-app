@@ -1,7 +1,7 @@
 import { useNavigate, NavLink } from "react-router-dom";
 import { useAuth } from "../custom/AuthContext";
 import { useCart } from "../custom/CartContext";
-import { LogOut, Package2, Users, LayoutDashboard } from "lucide-react";
+import { LogOut, LogIn, Package2, Users, LayoutDashboard } from "lucide-react";
 import { Button } from "./ui/button";
 
 const NavBar = () => {
@@ -17,7 +17,6 @@ const NavBar = () => {
 
   const handleSignOut = () => {
     signOut();
-    navigate("/sign-in", { replace: true });
   };
 
   return (
@@ -89,16 +88,28 @@ const NavBar = () => {
             </div>
           </div>
 
-          {/* Sign Out Button */}
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={handleSignOut}
-            className="border-slate-800 bg-slate-900/80 hover:bg-rose-950/40 hover:text-rose-300 hover:border-rose-900/50 text-slate-300 transition-colors gap-1.5 text-xs font-medium cursor-pointer"
-          >
-            <LogOut className="size-3.5" />
-            <span>Sign Out</span>
-          </Button>
+          {/* Sign Out / Sign In Button */}
+          {state.user ? (
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handleSignOut}
+              className="border-slate-800 bg-slate-900/80 hover:bg-rose-950/40 hover:text-rose-300 hover:border-rose-900/50 text-slate-300 transition-colors gap-1.5 text-xs font-medium cursor-pointer"
+            >
+              <LogOut className="size-3.5" />
+              <span>Sign Out</span>
+            </Button>
+          ) : (
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => navigate("/sign-in")}
+              className="border-slate-800 bg-slate-900/80 hover:bg-indigo-950/40 hover:text-indigo-300 hover:border-indigo-900/50 text-slate-300 transition-colors gap-1.5 text-xs font-medium cursor-pointer"
+            >
+              <LogIn className="size-3.5" />
+              <span>Sign In</span>
+            </Button>
+          )}
         </div>
       </div>
     </header>

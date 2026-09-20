@@ -2,7 +2,7 @@ import "./App.css";
 import { Link, Route, Routes } from "react-router-dom";
 import SignInPage from "./components/auth/SignInPage";
 import UserDirectory from "./pages/UserDirectory";
-import ProtectedRoute from "./components/auth/ProtectedRoute";
+// import ProtectedRoute from "./components/auth/ProtectedRoute";
 import { Compass } from "lucide-react";
 import InventoryPage from "./pages/InventoryPage";
 
@@ -15,10 +15,9 @@ function App() {
           <Route path="/sign-in" element={<SignInPage />} />
 
           {/* Protected Main Route */}
-          <Route element={<ProtectedRoute />}>
-            <Route path="/" element={<UserDirectory />} />
-            <Route path="/inventory" element={<InventoryPage />} />
-          </Route>
+          {/* <Route element={<ProtectedRoute />}></Route> */}
+          <Route path="/" element={<UserDirectory />} />
+          <Route path="/inventory" element={<InventoryPage />} />
 
           {/* 404 Not Found Route */}
           <Route

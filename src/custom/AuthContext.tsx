@@ -40,7 +40,7 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | null>(null);
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [state, dispatch] = useReducer(authReducer, mockUser);
+  const [state, dispatch] = useReducer(authReducer, { user: null });
 
   const signIn = (email: string): boolean => {
     const normalized = email.trim().toLowerCase();
